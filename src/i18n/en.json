@@ -1,0 +1,149 @@
+{
+  "app": {
+    "name": "HUSH",
+    "tagline": "Discover hidden secrets around you"
+  },
+  "nav": {
+    "feed": "Feed",
+    "map": "Echo Map",
+    "create": "Create",
+    "profile": "Profile",
+    "admin": "Admin"
+  },
+  "auth": {
+    "welcome": "Welcome to HUSH",
+    "subtitle": "Discover and hide secrets in the world around you",
+    "signInGoogle": "Sign in with Google",
+    "signInApple": "Sign in with Apple",
+    "signOut": "Sign Out",
+    "signingIn": "Signing in..."
+  },
+  "feed": {
+    "title": "Nearby Secrets",
+    "empty": "No secrets nearby. Be the first to hide one!",
+    "blurred": "Get closer to reveal this secret",
+    "distance": "{{distance}}m away",
+    "likes": "{{count}} likes",
+    "listens": "{{count}} listens",
+    "views": "{{count}} views",
+    "save": "Save",
+    "saved": "Saved",
+    "saveLimit": "You can save up to 50 of your own or other users' secrets",
+    "report": "Report",
+    "reported": "Reported",
+    "groupSecret": "Group Secret",
+    "needPeople": "Needs {{count}} people to unlock",
+    "withinRange": "You're in range! Tap to reveal",
+    "regularSecret": "Secret",
+    "contentWarning": "This secret has received negative feedback. View anyway?",
+    "viewAnyway": "View Anyway",
+    "cancel": "Cancel"
+  },
+  "create": {
+    "title": "Hide a Secret",
+    "textTab": "Text",
+    "voiceTab": "Voice",
+    "textPlaceholder": "Write your secret... (up to 140 characters)",
+    "charCount": "{{count}}/140",
+    "record": "Hold to Record",
+    "recording": "Recording...",
+    "recordingTime": "{{seconds}}s / 60s",
+    "stop": "Stop",
+    "play": "Play",
+    "delete": "Delete Recording",
+    "secretType": "Secret Type",
+    "regular": "Regular",
+    "regularDesc": "Anyone nearby can reveal it alone",
+    "group": "Group Secret",
+    "groupDesc": "Requires multiple people to be present simultaneously",
+    "peopleRequired": "People Required",
+    "timeWindow": "Time Window: {{minutes}} minutes",
+    "hideSecret": "Hide Secret",
+    "hiding": "Hiding your secret...",
+    "success": "Secret hidden successfully!",
+    "error": "Failed to hide secret. Try again.",
+    "locationRequired": "Location access is required to hide a secret",
+    "tierLocked": "Reach tier {{tier}} to unlock this option"
+  },
+  "profile": {
+    "title": "Profile",
+    "secrets": "Published Secrets",
+    "distinguished": "Distinguished",
+    "savedSecrets": "Saved Secrets",
+    "mySecrets": "My Secrets",
+    "otherSecrets": "Saved from Others",
+    "adminPanel": "Admin Panel",
+    "tier": "Tier {{level}}",
+    "noSecrets": "No secrets yet",
+    "ghostMode": "Ghost Mode Active",
+    "ghostModeDesc": "You cannot create new secrets until {{date}}",
+    "appeal": "Appeal Ban",
+    "enableNotifications": "Enable Notifications",
+    "notificationsEnabled": "Push notifications are now enabled!",
+    "notificationsFailed": "Could not enable notifications. Please check your browser settings."
+  },
+  "map": {
+    "title": "Echo Map",
+    "activeZone": "Active zone",
+    "secretsNearby": "{{count}} secrets in this area"
+  },
+  "tiers": {
+    "1": "Newcomer",
+    "2": "Whisperer",
+    "3": "Echo",
+    "4": "Signal",
+    "5": "Beacon",
+    "6": "Siren",
+    "7": "Oracle",
+    "8": "Phantom",
+    "9": "Specter",
+    "10": "Legend"
+  },
+  "notifications": {
+    "secretLiked": "Someone liked your secret!",
+    "secretDeleted": "Your secret was removed",
+    "deletionReasons": {
+      "noListens": "No listens in 7 days",
+      "fewListens": "Less than 5 listens in 3 weeks",
+      "expired": "Reached 60-day limit"
+    }
+  },
+  "ghost": {
+    "title": "Ghost Mode",
+    "blocked": "You are in Ghost Mode. You cannot create new secrets.",
+    "duration": "Restricted until {{date}}",
+    "canDo": "You can still:",
+    "canListen": "Listen to secrets",
+    "canVote": "Like or dislike secrets",
+    "canSave": "Save secrets",
+    "appealTitle": "Appeal Restriction",
+    "appealPlaceholder": "Explain why you think this restriction should be removed...",
+    "submitAppeal": "Submit Appeal",
+    "appealSubmitted": "Your appeal has been submitted for review"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Retry",
+    "close": "Close",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "like": "Like",
+    "dislike": "Dislike",
+    "locationDenied": "Location access denied. HUSH needs your location to work.",
+    "enableLocation": "Enable Location"
+  },
+  "admin": {
+    "title": "Admin",
+    "accessDenied": "Access Denied",
+    "appeals": "Appeals ({{count}})",
+    "reports": "Reports ({{count}})",
+    "noAppeals": "No pending appeals",
+    "approve": "✓ Approve",
+    "reject": "✗ Reject",
+    "noReports": "No pending reports",
+    "secretId": "Secret",
+    "reportedBy": "Reported by",
+    "markReviewed": "Mark Reviewed"
+  }
+}

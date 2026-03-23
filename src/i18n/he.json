@@ -1,0 +1,149 @@
+{
+  "app": {
+    "name": "HUSH",
+    "tagline": "גלה סודות חבויים סביבך"
+  },
+  "nav": {
+    "feed": "פיד",
+    "map": "מפת הד",
+    "create": "צור",
+    "profile": "פרופיל",
+    "admin": "ניהול"
+  },
+  "auth": {
+    "welcome": "ברוכים הבאים ל-HUSH",
+    "subtitle": "גלו והטמינו סודות בעולם שסביבכם",
+    "signInGoogle": "התחברות עם Google",
+    "signInApple": "התחברות עם Apple",
+    "signOut": "התנתק",
+    "signingIn": "מתחבר..."
+  },
+  "feed": {
+    "title": "סודות בסביבה",
+    "empty": "אין סודות בסביבה. היה הראשון להטמין אחד!",
+    "blurred": "התקרב כדי לחשוף את הסוד",
+    "distance": "{{distance}} מטר",
+    "likes": "{{count}} לייקים",
+    "listens": "{{count}} האזנות",
+    "views": "{{count}} צפיות",
+    "save": "שמור",
+    "saved": "נשמר",
+    "saveLimit": "ניתן לשמור עד 50 סודות שלך או של משתמשים אחרים",
+    "report": "דווח",
+    "reported": "דווח",
+    "groupSecret": "סוד כמוס",
+    "needPeople": "דרושים {{count}} אנשים לפתיחה",
+    "withinRange": "אתה בטווח! לחץ לחשיפה",
+    "regularSecret": "סוד",
+    "contentWarning": "הסוד הזה קיבל משוב שלילי. לצפות בכל זאת?",
+    "viewAnyway": "צפה בכל זאת",
+    "cancel": "ביטול"
+  },
+  "create": {
+    "title": "הטמן סוד",
+    "textTab": "טקסט",
+    "voiceTab": "קול",
+    "textPlaceholder": "כתוב את הסוד שלך... (עד 140 תווים)",
+    "charCount": "{{count}}/140",
+    "record": "החזק להקלטה",
+    "recording": "מקליט...",
+    "recordingTime": "{{seconds}} שנ׳ / 60 שנ׳",
+    "stop": "עצור",
+    "play": "נגן",
+    "delete": "מחק הקלטה",
+    "secretType": "סוג סוד",
+    "regular": "רגיל",
+    "regularDesc": "כל מי שבקרבת מקום יכול לחשוף לבד",
+    "group": "סוד כמוס",
+    "groupDesc": "דורש נוכחות של מספר אנשים בו-זמנית",
+    "peopleRequired": "אנשים נדרשים",
+    "timeWindow": "חלון זמן: {{minutes}} דקות",
+    "hideSecret": "הטמן סוד",
+    "hiding": "מטמין את הסוד שלך...",
+    "success": "הסוד הוטמן בהצלחה!",
+    "error": "ההטמנה נכשלה. נסה שוב.",
+    "locationRequired": "גישה למיקום נדרשת כדי להטמין סוד",
+    "tierLocked": "הגע לדרגה {{tier}} כדי לפתוח אפשרות זו"
+  },
+  "profile": {
+    "title": "פרופיל",
+    "secrets": "סודות שפורסמו",
+    "distinguished": "מובחרים",
+    "savedSecrets": "סודות שמורים",
+    "mySecrets": "הסודות שלי",
+    "otherSecrets": "שמורים מאחרים",
+    "adminPanel": "ניהול מערכת",
+    "tier": "דרגה {{level}}",
+    "noSecrets": "אין סודות עדיין",
+    "ghostMode": "מצב רוח פעיל",
+    "ghostModeDesc": "לא ניתן ליצור סודות חדשים עד {{date}}",
+    "appeal": "ערעור על חסימה",
+    "enableNotifications": "הפעלת התראות ועדכונים",
+    "notificationsEnabled": "עדכונים פועלים בהצלחה!",
+    "notificationsFailed": "לא ניתן להפעיל התראות. אנא בדוק את הגדרות הדפדפן שלך."
+  },
+  "map": {
+    "title": "מפת הד",
+    "activeZone": "אזור פעיל",
+    "secretsNearby": "{{count}} סודות באזור זה"
+  },
+  "tiers": {
+    "1": "חדש",
+    "2": "לוחש",
+    "3": "הד",
+    "4": "אות",
+    "5": "מגדלור",
+    "6": "צופר",
+    "7": "נביא",
+    "8": "פנטום",
+    "9": "רוח",
+    "10": "אגדה"
+  },
+  "notifications": {
+    "secretLiked": "מישהו עשה לייק לסוד שלך!",
+    "secretDeleted": "הסוד שלך הוסר",
+    "deletionReasons": {
+      "noListens": "אין האזנות ב-7 ימים",
+      "fewListens": "פחות מ-5 האזנות ב-3 שבועות",
+      "expired": "הגיע למגבלת 60 יום"
+    }
+  },
+  "ghost": {
+    "title": "מצב רוח",
+    "blocked": "אתה במצב רוח. לא ניתן ליצור סודות חדשים.",
+    "duration": "מוגבל עד {{date}}",
+    "canDo": "עדיין ניתן:",
+    "canListen": "להאזין לסודות",
+    "canVote": "לעשות לייק או דיסלייק לסודות",
+    "canSave": "לשמור סודות",
+    "appealTitle": "ערעור על הגבלה",
+    "appealPlaceholder": "הסבר מדוע ההגבלה צריכה להיות מוסרת...",
+    "submitAppeal": "שלח ערעור",
+    "appealSubmitted": "הערעור שלך נשלח לבדיקה"
+  },
+  "common": {
+    "loading": "טוען...",
+    "error": "משהו השתבש",
+    "retry": "נסה שוב",
+    "close": "סגור",
+    "confirm": "אישור",
+    "cancel": "ביטול",
+    "like": "לייק",
+    "dislike": "דיסלייק",
+    "locationDenied": "גישה למיקום נדחתה. HUSH צריך את המיקום שלך כדי לעבוד.",
+    "enableLocation": "אפשר מיקום"
+  },
+  "admin": {
+    "title": "ניהול",
+    "accessDenied": "הגישה נדחתה",
+    "appeals": "ערעורים ({{count}})",
+    "reports": "דיווחים ({{count}})",
+    "noAppeals": "אין ערעורים הממתינים לטיפול",
+    "approve": "✓ אישור",
+    "reject": "✗ דחייה",
+    "noReports": "אין דיווחים הממתינים לטיפול",
+    "secretId": "סוד",
+    "reportedBy": "דווח על ידי",
+    "markReviewed": "סמן כנבדק"
+  }
+}
