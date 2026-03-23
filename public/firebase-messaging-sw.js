@@ -2,6 +2,9 @@ importScripts("https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"
 importScripts("https://www.gstatic.com/firebasejs/10.7.0/firebase-messaging-compat.js");
 
 // Initialize the Firebase app in the service worker by passing in the messagingSenderId.
+// Note: It is normal for this configuration (including the API key) to be public in client-side code.
+// However, the API key MUST be restricted in the Google Cloud Console to only allow requests
+// from your specific domains (e.g., hush-7bab0.web.app, hush-web.com).
 const firebaseConfig = {
   apiKey: "AIzaSyDjWq7tglRokKa6WpPlZgUSNB1KHuMyG00",
   authDomain: "hush-7bab0.firebaseapp.com",
