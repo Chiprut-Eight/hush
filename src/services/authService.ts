@@ -2,8 +2,6 @@ import {
   GoogleAuthProvider,
   OAuthProvider,
   signInWithPopup,
-  signInWithRedirect,
-  getRedirectResult,
   signOut as firebaseSignOut,
   onAuthStateChanged,
   type User,
@@ -11,7 +9,6 @@ import {
 } from 'firebase/auth';
 import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { auth, db, isFirebaseConfigured } from '../config/firebase';
-import { Capacitor } from '@capacitor/core';
 
 export type HushUser = {
   uid: string;
@@ -33,17 +30,8 @@ const appleProvider = new OAuthProvider('apple.com');
 appleProvider.addScope('email');
 appleProvider.addScope('name');
 
-const isNative = Capacitor.isNativePlatform();
-
 export async function signInWithGoogle(): Promise<User> {
   if (!auth) throw new Error('Firebase not configured');
-  if (isNative) {
-    // On native, popup is blocked by WebView — use redirect instead
-    await signInWithRedirect(auth, googleProvider);
-    // After redirect, the result is picked up by handleRedirectResult()
-    // Return a placeholder since the page will reload
-    return {} as User;
-  }
   const result = await signInWithPopup(auth, googleProvider);
   await ensureUserProfile(result.user);
   return result.user;
@@ -51,31 +39,9 @@ export async function signInWithGoogle(): Promise<User> {
 
 export async function signInWithApple(): Promise<User> {
   if (!auth) throw new Error('Firebase not configured');
-  if (isNative) {
-    await signInWithRedirect(auth, appleProvider);
-    return {} as User;
-  }
   const result = await signInWithPopup(auth, appleProvider);
   await ensureUserProfile(result.user);
   return result.user;
-}
-
-/**
- * Handle the redirect result after returning from Google/Apple sign-in on native.
- * Should be called once on app startup.
- */
-export async function handleRedirectResult(): Promise<User | null> {
-  if (!auth) return null;
-  try {
-    const result = await getRedirectResult(auth);
-    if (result?.user) {
-      await ensureUserProfile(result.user);
-      return result.user;
-    }
-  } catch (error) {
-    console.error('Redirect sign-in failed:', error);
-  }
-  return null;
 }
 
 export async function signOut(): Promise<void> {

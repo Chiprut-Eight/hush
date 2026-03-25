@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import { type User } from 'firebase/auth';
-import { onAuthChange, getUserProfile, handleRedirectResult, type HushUser } from '../services/authService';
+import { onAuthChange, getUserProfile, type HushUser } from '../services/authService';
 
 interface AuthContextType {
   firebaseUser: User | null;
@@ -29,9 +29,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
-    // On native, check for redirect sign-in result on startup
-    handleRedirectResult();
-
     const unsubscribe = onAuthChange(async (user) => {
       setFirebaseUser(user);
       if (user) {

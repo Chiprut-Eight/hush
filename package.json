@@ -9,14 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@capacitor/android": "^8.2.0",
-    "@capacitor/app": "^8.0.1",
-    "@capacitor/cli": "^8.2.0",
-    "@capacitor/core": "^8.2.0",
-    "@capacitor/geolocation": "^8.1.0",
-    "@capacitor/push-notifications": "^8.0.2",
-    "@capacitor/splash-screen": "^8.0.1",
-    "@capacitor/status-bar": "^8.0.1",
     "firebase": "^11.4.0",
     "i18next": "^24.2.2",
     "mapbox-gl": "^3.10.0",
