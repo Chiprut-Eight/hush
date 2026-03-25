@@ -7,7 +7,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['hush_logo.png'],
+      includeAssets: ['logo2.png'],
       workbox: {
         maximumFileSizeToCacheInBytes: 5000000,
         // Don't let the service worker serve index.html from cache for navigation.

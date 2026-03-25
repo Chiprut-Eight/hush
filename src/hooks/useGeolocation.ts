@@ -1,4 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
+import { Capacitor } from '@capacitor/core';
+import { Geolocation } from '@capacitor/geolocation';
 
 export interface GeoPosition {
   lat: number;
@@ -26,82 +28,116 @@ function quickDistance(lat1: number, lng1: number, lat2: number, lng2: number): 
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
+const isNative = Capacitor.isNativePlatform();
+
 export function useGeolocation(): UseGeolocationResult {
   const [position, setPosition] = useState<GeoPosition | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
-  const [watchId, setWatchId] = useState<number | null>(null);
+  const watchIdRef = useRef<string | number | null>(null);
   const lastPos = useRef<{ lat: number; lng: number } | null>(null);
 
-  const startWatching = useCallback(() => {
-    if (!navigator.geolocation) {
-      setError('Geolocation is not supported by this browser');
-      setLoading(false);
-      return;
+  const handlePosition = useCallback((lat: number, lng: number, accuracy: number, timestamp: number) => {
+    if (
+      !lastPos.current ||
+      quickDistance(lastPos.current.lat, lastPos.current.lng, lat, lng) >= MIN_MOVE_THRESHOLD
+    ) {
+      lastPos.current = { lat, lng };
+      setPosition({ lat, lng, accuracy, timestamp });
     }
+    setLoading(false);
+    setError(null);
+  }, []);
 
+  const startWatching = useCallback(async () => {
     setLoading(true);
     setError(null);
 
-    const id = navigator.geolocation.watchPosition(
-      (pos) => {
-        const newLat = pos.coords.latitude;
-        const newLng = pos.coords.longitude;
-
-        // Only update state if this is the first reading or user moved significantly
-        if (
-          !lastPos.current ||
-          quickDistance(lastPos.current.lat, lastPos.current.lng, newLat, newLng) >= MIN_MOVE_THRESHOLD
-        ) {
-          lastPos.current = { lat: newLat, lng: newLng };
-          setPosition({
-            lat: newLat,
-            lng: newLng,
-            accuracy: pos.coords.accuracy,
-            timestamp: pos.timestamp,
-          });
+    if (isNative) {
+      // Use Capacitor Geolocation plugin on native
+      try {
+        const perm = await Geolocation.requestPermissions();
+        if (perm.location !== 'granted' && perm.coarseLocation !== 'granted') {
+          setError('PERMISSION_DENIED');
+          setLoading(false);
+          return;
         }
+        const watchId = await Geolocation.watchPosition(
+          { enableHighAccuracy: true, timeout: 15000, maximumAge: 5000 },
+          (pos, err) => {
+            if (err) {
+              setError(err.message || 'UNKNOWN_ERROR');
+              setLoading(false);
+              return;
+            }
+            if (pos) {
+              handlePosition(pos.coords.latitude, pos.coords.longitude, pos.coords.accuracy, pos.timestamp);
+            }
+          }
+        );
+        watchIdRef.current = watchId;
+      } catch (err) {
+        setError('PERMISSION_DENIED');
         setLoading(false);
-        setError(null);
-      },
-      (err) => {
-        switch (err.code) {
-          case err.PERMISSION_DENIED:
-            setError('PERMISSION_DENIED');
-            break;
-          case err.POSITION_UNAVAILABLE:
-            setError('POSITION_UNAVAILABLE');
-            break;
-          case err.TIMEOUT:
-            setError('TIMEOUT');
-            break;
-          default:
-            setError('UNKNOWN_ERROR');
-        }
-        setLoading(false);
-      },
-      {
-        enableHighAccuracy: true,
-        timeout: 15000,
-        maximumAge: 5000,
       }
-    );
+    } else {
+      // Use browser Geolocation API on web
+      if (!navigator.geolocation) {
+        setError('Geolocation is not supported by this browser');
+        setLoading(false);
+        return;
+      }
 
-    setWatchId(id);
-  }, []);
+      const id = navigator.geolocation.watchPosition(
+        (pos) => {
+          handlePosition(pos.coords.latitude, pos.coords.longitude, pos.coords.accuracy, pos.timestamp);
+        },
+        (err) => {
+          switch (err.code) {
+            case err.PERMISSION_DENIED:
+              setError('PERMISSION_DENIED');
+              break;
+            case err.POSITION_UNAVAILABLE:
+              setError('POSITION_UNAVAILABLE');
+              break;
+            case err.TIMEOUT:
+              setError('TIMEOUT');
+              break;
+            default:
+              setError('UNKNOWN_ERROR');
+          }
+          setLoading(false);
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 15000,
+          maximumAge: 5000,
+        }
+      );
+      watchIdRef.current = id;
+    }
+  }, [handlePosition]);
 
-  const retry = useCallback(() => {
-    if (watchId !== null) {
-      navigator.geolocation.clearWatch(watchId);
+  const retry = useCallback(async () => {
+    if (watchIdRef.current !== null) {
+      if (isNative) {
+        await Geolocation.clearWatch({ id: watchIdRef.current as string });
+      } else {
+        navigator.geolocation.clearWatch(watchIdRef.current as number);
+      }
     }
     startWatching();
-  }, [watchId, startWatching]);
+  }, [startWatching]);
 
   useEffect(() => {
     startWatching();
     return () => {
-      if (watchId !== null) {
-        navigator.geolocation.clearWatch(watchId);
+      if (watchIdRef.current !== null) {
+        if (isNative) {
+          Geolocation.clearWatch({ id: watchIdRef.current as string });
+        } else {
+          navigator.geolocation.clearWatch(watchIdRef.current as number);
+        }
       }
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
